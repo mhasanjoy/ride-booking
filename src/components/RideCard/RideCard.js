@@ -6,7 +6,7 @@ const RideCard = (props) => {
   const { title, image } = props.ride;
 
   return (
-    <div className="col-md-3 mb-5 pb-5">
+    <div className="col-xl-3 col-md-6 mb-5 pb-5">
       <div className="card align-items-center">
         <img src={image} className="card-img-top" alt="" />
         <div className="card-body">

@@ -51,3 +51,8 @@
   color: green;
   font-size: 25px;
 }
+@media (max-width: 768px) {
+  .login-form {
+    width: 100%;
+  }
+}

@@ -51,23 +51,30 @@ const Login = () => {
     setUser(userInfo);
   };
 
+  const logIn = (userCredential) => {
+    const { email } = userCredential.user;
+    const displayName = user.name;
+    const signedInUser = { name: displayName, email };
+    setLoggedInUser(signedInUser);
+    history.replace(from);
+  };
+
+  const showError = (error) => {
+    const errorMessage = error.message;
+    setError(errorMessage);
+  };
+
   const handleEmailAndPasswordSignUp = (event) => {
     if (user.password === user.confirmPassword) {
       firebase
         .auth()
         .createUserWithEmailAndPassword(user.email, user.password)
         .then((userCredential) => {
-          const { email } = userCredential.user;
-          const displayName = user.name;
-          const signedInUser = { name: displayName, email };
-          setLoggedInUser(signedInUser);
-          sessionStorage.setItem("user", email);
-          history.replace(from);
+          logIn(userCredential);
         })
         .catch((error) => {
           setPasswordNotMatched(false);
-          const errorMessage = error.message;
-          setError(errorMessage);
+          showError(error);
         });
     } else {
       setError("");
@@ -82,16 +89,10 @@ const Login = () => {
       .auth()
       .signInWithEmailAndPassword(user.email, user.password)
       .then((userCredential) => {
-        const { email } = userCredential.user;
-        const displayName = user.name;
-        const signedInUser = { name: displayName, email };
-        setLoggedInUser(signedInUser);
-        sessionStorage.setItem("user", email);
-        history.replace(from);
+        logIn(userCredential);
       })
       .catch((error) => {
-        const errorMessage = error.message;
-        setError(errorMessage);
+        showError(error);
       });
     event.preventDefault();
   };
@@ -105,12 +106,10 @@ const Login = () => {
         const { displayName, email } = result.user;
         const signedInUser = { name: displayName, email };
         setLoggedInUser(signedInUser);
-        sessionStorage.setItem("user", email);
         history.replace(from);
       })
       .catch((error) => {
-        const errorMessage = error.message;
-        setError(errorMessage);
+        showError(error);
       });
   };
 

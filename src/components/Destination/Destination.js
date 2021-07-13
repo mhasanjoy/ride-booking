@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./Destination.css";
-import map from "../../images/map.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRoad, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router";
@@ -9,9 +8,15 @@ import carImage from "../../images/car.png";
 import busImage from "../../images/bus.png";
 import trainImage from "../../images/train.png";
 
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import {
+  DirectionsRenderer,
+  DirectionsService,
+  GoogleMap,
+  LoadScript,
+  Marker,
+} from "@react-google-maps/api";
 const containerStyle = {
-  width: "765px",
+  width: "100%",
   height: "715px",
 };
 const position = {
@@ -60,6 +65,8 @@ const Destination = () => {
     }
     event.preventDefault();
   };
+
+  const [directionResponse, setDirectionResponse] = useState(null);
 
   return (
     <div className="container mt-5 pb-5">
@@ -132,7 +139,6 @@ const Destination = () => {
           )}
         </div>
         <div className="col-md-8">
-          {/* <img src={map} alt="" style={{ width: "100%" }} /> */}
           {!transportation && (
             <LoadScript googleMapsApiKey="">
               <GoogleMap
@@ -144,7 +150,37 @@ const Destination = () => {
               </GoogleMap>
             </LoadScript>
           )}
-          {/* {transportation && } */}
+          {transportation && (
+            <LoadScript googleMapsApiKey="">
+              <GoogleMap
+                mapContainerStyle={containerStyle}
+                center={position}
+                zoom={10}
+              >
+                <DirectionsService
+                  options={{
+                    destination: location.destination,
+                    origin: location.currentLocation,
+                    travelMode: "TRANSIT",
+                  }}
+                  callback={(response) => {
+                    if (response !== null) {
+                      if (response.status === "OK") {
+                        setDirectionResponse(response);
+                      }
+                    }
+                  }}
+                />
+                {directionResponse && (
+                  <DirectionsRenderer
+                    options={{
+                      directions: directionResponse,
+                    }}
+                  />
+                )}
+              </GoogleMap>
+            </LoadScript>
+          )}
         </div>
       </div>
     </div>
