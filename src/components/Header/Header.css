@@ -1,0 +1,15 @@
+.nav-link {
+  font-size: 18px;
+  color: black;
+  font-weight: 500;
+}
+.login-btn {
+  background-color: darkorange;
+  padding: 0 15px;
+  border-radius: 5px;
+}
+.name {
+  color: white;
+  padding-top: 12px;
+  font-size: 18px;
+}

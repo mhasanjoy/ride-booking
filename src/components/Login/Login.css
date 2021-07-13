@@ -1,0 +1,53 @@
+.login-form {
+  background-color: white;
+  border-radius: 5px;
+  width: 50%;
+  margin-top: 50px;
+  margin-bottom: 200px;
+}
+.form-content {
+  padding: 20px 40px;
+}
+.form-input,
+.submit-btn {
+  width: 100%;
+  padding: 12px 10px;
+  border: none;
+  border-bottom: 1px solid lightgray;
+}
+.submit-btn {
+  background-color: darkorange;
+  color: white;
+  border-radius: 5px;
+}
+.toggle-form {
+  cursor: pointer;
+  text-decoration: underline;
+  color: darkorange;
+}
+.style-or {
+  width: 90%;
+  text-align: center;
+  border-bottom: 1px solid gray;
+  line-height: 0.1em;
+  margin: 40px auto;
+  margin-bottom: 30px;
+}
+.style-or span {
+  background: rgb(255, 255, 255);
+  padding: 0px 10px;
+}
+.google-btn {
+  border: 1px solid lightgray;
+  border-radius: 25px;
+  text-align: center;
+  display: inline-block;
+  padding: 10px;
+  width: 400px;
+  cursor: pointer;
+}
+.google-btn .google-icon {
+  margin-right: 20px;
+  color: green;
+  font-size: 25px;
+}
